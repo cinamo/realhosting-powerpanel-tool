@@ -129,7 +129,7 @@ class PowerPanelClient
         if(!array_key_exists('dnszone', $response)) {
             return [];
         }
-        $dnsRecords = ['dnszone']['result']['records'];
+        $dnsRecords = $response['dnszone']['result']['records'];
 
         return $dnsRecords;
     }
