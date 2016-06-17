@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Yaml\Yaml;
+
+$configValues = Yaml::parse(file_get_contents(__DIR__.'/config.yml'));
+
+$powerPanelClient = new \Cinamo\PowerPanel\PowerPanelClient($configValues['cinamo.powerpanel']['username'], $configValues['cinamo.powerpanel']['password']);
+
+$application = new Application();
+$application->setName('PowerPanel Tool');
+$application->setVersion('0.1');
+$application->add(new \Cinamo\PowerPanel\Command\DomainsListCommand($powerPanelClient));
+$application->add(new \Cinamo\PowerPanel\Command\DnsShowCommand($powerPanelClient));
+$application->add(new \Cinamo\PowerPanel\Command\DnsUpdateCommand($powerPanelClient));
+$application->add(new \Cinamo\PowerPanel\Command\DnsMigrateIPCommand($powerPanelClient));
+$application->run();

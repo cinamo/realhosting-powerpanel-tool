@@ -1,0 +1,10 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "symfony/console": "^3.1",
+        "symfony/yaml": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {"Cinamo\\PowerPanel\\": "src/Cinamo/PowerPanel/"}
+    }
+}
