@@ -2,7 +2,7 @@
 
 Very basic command line tool for interacting with RealHosting PowerPanel.
 
-Please note that the PowerPanel API is currently not public and may change at any moment. No warranties. Usage of this tool might completely ruin your DNS settings.
+DISCLAIMER: I'm not affiliated with RealHosting in any way, this library is not supported by RealHosting. Please note that the PowerPanel API is currently not public and may change at any moment. No warranties. Usage of this tool might completely ruin your DNS settings.
 
 ## Installing
 
