@@ -135,6 +135,46 @@ class PowerPanelClient
     }
 
     /**
+     * Add a DNS record for a domain.
+     *
+     * @param $domain
+     * @param $recordName
+     * @param $type
+     * @param $content
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function addDnsRecord($domain, $recordName, $type, $content)
+    {
+        $this->authenticate();
+
+        if (in_array($type, ['AAAA']) && filter_var($content, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false) {
+            throw new \Exception("$content must be a valid IPV6 address");
+        }
+
+        if (in_array($type, ['A', 'CNAME']) && filter_var($content, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === false) {
+            throw new \Exception("$content must be a valid IPV4 address");
+        }
+
+        $addRes = $this->client->post('domainsave/addDNSRecord/0', [
+            'json' => [
+                'domain' => $domain,
+                'dnsType' => $type,
+                'TTL' => 0,
+                'settings' => [
+                    'name' => $recordName,
+                    'value' => $content
+                ]
+            ]
+        ]);
+
+        $response = $addRes->getBody()->getContents();
+
+        return json_decode($response, true)['success'];
+    }
+
+    /**
      * Update the DNS record for a domain.
      *
      * @param $domain

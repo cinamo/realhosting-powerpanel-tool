@@ -14,6 +14,7 @@ $application = new Application();
 $application->setName('PowerPanel Tool');
 $application->setVersion('0.1');
 $application->add(new \Cinamo\PowerPanel\Command\DomainsListCommand($powerPanelClient));
+$application->add(new \Cinamo\PowerPanel\Command\DnsAddCommand($powerPanelClient));
 $application->add(new \Cinamo\PowerPanel\Command\DnsShowCommand($powerPanelClient));
 $application->add(new \Cinamo\PowerPanel\Command\DnsUpdateCommand($powerPanelClient));
 $application->add(new \Cinamo\PowerPanel\Command\DnsMigrateIPCommand($powerPanelClient));
