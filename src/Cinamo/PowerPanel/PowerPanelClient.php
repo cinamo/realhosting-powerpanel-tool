@@ -125,7 +125,11 @@ class PowerPanelClient
         $this->authenticate();
 
         $res = $this->client->post('domains/LoadDNSZone/0', ['json' => ['domain' => $domain]]);
-        $dnsRecords = json_decode($res->getBody()->getContents(), true)['dnszone']['result']['records'];
+        $response = json_decode($res->getBody()->getContents(), true);
+        if(!array_key_exists('dnszone', $response)) {
+            return [];
+        }
+        $dnsRecords = ['dnszone']['result']['records'];
 
         return $dnsRecords;
     }

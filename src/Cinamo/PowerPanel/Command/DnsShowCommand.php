@@ -34,8 +34,10 @@ class DnsShowCommand extends PowerPanelCommand
         $output->writeln('<comment>' . $domain . '</comment>');
         $output->writeln('');
         $output->writeln('   Owner: <info>' . $details['owner'] . '</info>');
-        $output->writeln('   DNS hosting: ' . ($details['dns_hosting'] ? '<info>yes</info>' : '<warning>no</warning>'));
+        $output->writeln('   DNS hosting: ' . ($details['dns_hosting'] ? '<info>yes</info>' : '<comment>no</comment>'));
         $output->writeln('   NS: ' . $ns);
+        if(count($records) === 0) return;
+
         $output->writeln('');
         foreach($records as $record) {
             $output->writeln('   ' . $record['type'] . ' ' . $record['name'] . ': <info>' . $record['content'] . '</info>');
